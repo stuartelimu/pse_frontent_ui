@@ -36,3 +36,114 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  max-width: 60%;
+  margin: 0 auto;
+  width: 30rem;
+  text-align: le;
+  max-height: 80vh;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: .3rem;
+}
+
+.todo-item:hover {
+  background-color: #E7E9EB;
+}
+
+.modal-content {
+  background: #FFF;
+  border-radius: .5rem;
+  box-shadow: 0 10px 20px rgba(black, 0.2);
+  left: 50%;
+  max-width: 80%;
+  position: absolute;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  text-align: left;
+  max-height: 80vh;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.modal {
+  transition: opacity 0.2s ease-out;
+  background:#0f172a;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  pointer-events: all;
+  opacity: 0.5;
+
+  
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  border-top: 1px solid #e0e0e0;
+  overflow: auto;
+}
+
+.btn-delete {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-color: transparent;
+  background-color: red;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}
+
+.checkbox-toggle {
+  width: 30px;
+  height: 30px;
+  accent-color: green;
+}
+
+.btn-add {
+  border-color: transparent;
+  background-color: green;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  border-radius: .5rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination-items {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.pagination-items button {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
