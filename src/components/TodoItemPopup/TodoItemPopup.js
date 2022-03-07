@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import TodoForm from '../TodoForm/TodoForm';
 
+import './TodoItemPopup.css';
+
 export default function TodoItemPopup({ togglePopup, addTodo, isEdit, todo, updateTodo }) {
 
   

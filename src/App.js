@@ -8,10 +8,12 @@ import TodoItem from './components/TodoItem/TodoItem';
 import TodoItemPopup from './components/TodoItemPopup/TodoItemPopup';
 
 
-function TodoPagination({todos, RenderComponent, pageLimit, dataLimit, toggleTodo, viewTodoItem, removeTodo}) {
+function TodoPagination({todos, RenderComponent, dataLimit, toggleTodo, viewTodoItem, removeTodo}) {
 
-  const [pages] = useState(Math.round(todos.length / dataLimit));
+  const [pages] = useState(Math.ceil(todos.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
+
+  const pageLimit = pages <= 5 ? pages : 5;
 
   console.log(pages);
 
@@ -121,6 +123,7 @@ function App() {
 
   const togglePopup = () => {
     setOpen(false);
+    setIsEdit(false);
   }
 
   const viewTodoItem = (id) => {
@@ -157,7 +160,7 @@ function App() {
 
       {todos.length > 0 ? (
         <>
-          <TodoPagination todos={todos} RenderComponent={TodoItem} pageLimit={5} dataLimit={5} toggleTodo={toggleTodo} removeTodo={removeTodo} viewTodoItem={viewTodoItem} />
+          <TodoPagination todos={todos} RenderComponent={TodoItem} dataLimit={5} toggleTodo={toggleTodo} removeTodo={removeTodo} viewTodoItem={viewTodoItem} />
         </>
       ): <h1>No Todos</h1>}
       

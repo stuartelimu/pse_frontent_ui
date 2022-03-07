@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './TodoForm.css';
 
 
 export default function TodoForm({ addTodo, isEdit, updateTodo, todo }) {
@@ -19,7 +20,7 @@ export default function TodoForm({ addTodo, isEdit, updateTodo, todo }) {
   
     return (
       <form onSubmit={handleSubmit} >
-        <input type="text" value={value} autoComplete="off" onChange={handleChange} />
+        <input className='todo-input' autoFocus type="text" value={value} autoComplete="off" onChange={handleChange} />
       </form>
     )
   
