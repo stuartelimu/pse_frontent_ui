@@ -8,12 +8,12 @@ import TodoItem from './components/TodoItem/TodoItem';
 import TodoItemPopup from './components/TodoItemPopup/TodoItemPopup';
 
 
-function TodoPagination({todos, RenderComponent, dataLimit, toggleTodo, viewTodoItem, removeTodo}) {
+function TodoPagination({todos, RenderComponent, pages, dataLimit, toggleTodo, viewTodoItem, removeTodo}) {
 
-  const [pages] = useState(Math.ceil(todos.length / dataLimit));
+  // let [pages] = useState(Math.ceil(todos.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pageLimit = pages <= 5 ? pages : 5;
+  let pageLimit = pages <= 5 ? pages : 5;
 
   console.log(pages);
 
@@ -76,11 +76,29 @@ function TodoPagination({todos, RenderComponent, dataLimit, toggleTodo, viewTodo
 
 function App() {
 
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    let mounted = true;
+    getTodos().then(data => {
+      if(mounted) {
+        setTodos(data['results'])
+      }
+    })
+    return () => mounted = false;
+  }, [])
+
+  
+  const [pages, setPages] = useState(1);
+
+
   const addTodo = text => {
     const todo = { title: text, completed: false };
-    addTodoItem(todo);
     setTodos([...todos, todo]);
+    addTodoItem(todo);
+    todos.length === 0 ? setPages(1) : setPages(Math.ceil(todos.length / 5));
     setOpen(false);
+
   }
 
   const updateTodo = (text, id) => {
@@ -111,9 +129,11 @@ function App() {
   }
 
   const removeTodo = id => {
+    // refreshTodos();
+
     setTodos(todos.filter(todo => id !== todo.id));
     removeTodoItem(id);
-    refreshTodos();
+    setPages(Math.round(todos.length / 5));
   }
 
   const [open, setOpen] = useState(false);
@@ -137,22 +157,9 @@ function App() {
     });
 
   }
+
  
-  const [todos, setTodos] = useState([])
-
-  const refreshTodos = () => {
-    let mounted = true;
-    getTodos().then(data => {
-      if(mounted) {
-        setTodos(data['results'])
-      }
-    })
-    return () => mounted = false;
-  }
-
-  useEffect(() => {
-    refreshTodos();
-  }, [])
+  
 
   return (
     <div className="container">
@@ -160,7 +167,7 @@ function App() {
 
       {todos.length > 0 ? (
         <>
-          <TodoPagination todos={todos} RenderComponent={TodoItem} dataLimit={5} toggleTodo={toggleTodo} removeTodo={removeTodo} viewTodoItem={viewTodoItem} />
+          <TodoPagination todos={todos} RenderComponent={TodoItem} pages={pages} dataLimit={5} toggleTodo={toggleTodo} removeTodo={removeTodo} viewTodoItem={viewTodoItem} />
         </>
       ): <h1>No Todos</h1>}
       
